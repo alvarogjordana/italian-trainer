@@ -5,6 +5,25 @@ Spanish/English speakers. Spaced-repetition flashcards, typing practice, verb
 conjugation drills, browsing/search with CRUD, progress stats, and JSON
 backup — all client-side, no backend, no accounts.
 
+## Access gate
+
+The app sits behind a single shared HTTP Basic Auth password (see
+`src/middleware.ts`) to keep it off search engines and random visitors — it is
+**not** a real multi-user login, just a lock on the front door. Credentials are
+read from environment variables so they never ship in the client bundle:
+
+```bash
+cp .env.example .env.local
+# then edit .env.local and set:
+#   APP_BASIC_AUTH_USER=...
+#   APP_BASIC_AUTH_PASSWORD=...
+```
+
+In production (Vercel), set `APP_BASIC_AUTH_USER` and
+`APP_BASIC_AUTH_PASSWORD` under **Project Settings → Environment Variables**
+instead of committing `.env.local`. If these variables are unset, the gate is
+disabled and the app is open to anyone with the link.
+
 ## Features
 
 - **Review (home)** — SM-2 spaced-repetition queue of due cards. Flip to reveal,
