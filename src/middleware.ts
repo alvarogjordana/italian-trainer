@@ -46,6 +46,11 @@ export function middleware(req: NextRequest): NextResponse {
 }
 
 export const config = {
-  // Apply to everything except Next.js internals/static assets.
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  // Apply to everything except Next.js internals/static assets and the PWA
+  // manifest/icons — browsers fetch those without forwarding cached Basic
+  // Auth credentials, so gating them silently breaks "Add to Home Screen".
+  // None of them expose any app data, just the name and icon.
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|manifest.webmanifest|icon|apple-icon).*)",
+  ],
 };
