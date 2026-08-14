@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark is the default; the .dark class is applied to <html>. Light overrides
+   below via :root:not(.dark). High-contrast, calm palette. */
+:root {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --bg: 15 17 21;
+  --surface: 23 26 33;
+  --surface-2: 31 35 44;
+  --border: 46 52 64;
+  --fg: 233 237 244;
+  --muted: 150 160 178;
+  --accent: 56 189 248;
+  --accent-fg: 8 12 20;
+  --success: 74 222 128;
+  --warning: 250 204 21;
+  --danger: 248 113 113;
+}
+
+:root:not(.dark) {
+  --bg: 250 250 249;
+  --surface: 255 255 255;
+  --surface-2: 244 244 245;
+  --border: 214 218 224;
+  --fg: 24 27 33;
+  --muted: 88 96 110;
+  --accent: 2 132 199;
+  --accent-fg: 255 255 255;
+  --success: 22 163 74;
+  --warning: 202 138 4;
+  --danger: 220 38 38;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Focus visibility for keyboard users. */
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 2px;
+}
+
+/* Thin, unobtrusive scrollbars. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--border)) transparent;
+}
